@@ -4,7 +4,7 @@
   "description": "## Project setup",
   "main": "main.ts",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --open",
     "build": "webpack"
   },
   "author": "",
