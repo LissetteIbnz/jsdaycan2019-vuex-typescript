@@ -1,5 +1,8 @@
+import { ExtendedCartState } from "./modules/cart";
+import { ExtendedProductsState } from "./modules/products";
+
 /** Root State */
-export interface RootState {
+export interface RootState extends ExtendedCartState, ExtendedProductsState {
   loading: boolean;
   snackbar: Snackbar;
 }

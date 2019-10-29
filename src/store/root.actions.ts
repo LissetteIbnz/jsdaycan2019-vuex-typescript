@@ -1,6 +1,6 @@
 import { ActionTree } from "vuex";
 import { RootState, SetSnackbar } from "./root.models";
-import { mutationsTypes } from "./root.mutations";
+import { rootMutationsTypes } from "./root.mutations";
 
 enum ActionsTypes {
   SHOW_SNACKBAR = "showSnackbar",
@@ -9,23 +9,21 @@ enum ActionsTypes {
 const actions: ActionTree<RootState, RootState> = {
   [ActionsTypes.SHOW_SNACKBAR]: (
     { commit },
-    { payload }: { payload: SetSnackbar },
+    { snackbar }: { snackbar: SetSnackbar },
   ) => {
-    const snackbar: RootState["snackbar"] = { ...payload, isActive: true };
-    commit(mutationsTypes.setSnackbar(snackbar));
+    commit(rootMutationsTypes.setSnackbar({ ...snackbar, isActive: true }));
 
     setTimeout(() => {
-      snackbar.isActive = false;
-      commit(mutationsTypes.setSnackbar(snackbar));
+      commit(rootMutationsTypes.setSnackbar({ ...snackbar, isActive: false }));
     }, 3000);
   },
 };
 
 /** Helpers types */
-export const actionsTypes = {
-  [ActionsTypes.SHOW_SNACKBAR]: (payload: SetSnackbar) => ({
+export const rootActionsTypes = {
+  [ActionsTypes.SHOW_SNACKBAR]: (snackbar: SetSnackbar) => ({
     type: ActionsTypes.SHOW_SNACKBAR,
-    payload,
+    snackbar,
   }),
 };
 

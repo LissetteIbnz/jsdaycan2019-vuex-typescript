@@ -9,31 +9,32 @@ enum MutationsTypes {
 const mutations: MutationTree<RootState> = {
   [MutationsTypes.SET_LOADING]: (
     state,
-    { payload }: { payload: RootState["loading"] },
+    { loading }: { loading: RootState["loading"] },
   ) => {
-    state.loading = payload;
+    state.loading = loading;
   },
+
   [MutationsTypes.SET_SNACKBAR]: (
     state,
-    { payload }: { payload: RootState["snackbar"] },
+    { snackbar }: { snackbar: RootState["snackbar"] },
   ) => {
     state.snackbar = {
-      message: payload.message,
-      type: payload.type || "success",
-      isActive: payload.isActive,
+      message: snackbar.message,
+      type: snackbar.type || "success",
+      isActive: snackbar.isActive,
     };
   },
 };
 
 /** Helpers types */
-export const mutationsTypes = {
-  [MutationsTypes.SET_LOADING]: (payload: RootState["loading"]) => ({
+export const rootMutationsTypes = {
+  [MutationsTypes.SET_LOADING]: (loading: RootState["loading"]) => ({
     type: MutationsTypes.SET_LOADING,
-    payload,
+    loading,
   }),
-  [MutationsTypes.SET_SNACKBAR]: (payload: RootState["snackbar"]) => ({
+  [MutationsTypes.SET_SNACKBAR]: (snackbar: RootState["snackbar"]) => ({
     type: MutationsTypes.SET_SNACKBAR,
-    payload,
+    snackbar,
   }),
 };
 

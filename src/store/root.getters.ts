@@ -13,7 +13,7 @@ const getters: GetterTree<RootState, {}> = {
 };
 
 /** Helpers types */
-export const gettersTypes = {
+export const rootGettersTypes = {
   [GettersTypes.SNACKBAR]: GettersTypes.SNACKBAR,
 };
 
