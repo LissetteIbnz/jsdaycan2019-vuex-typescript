@@ -6,6 +6,6 @@ Es una primera aproximación basada en mutaciones y acciones usando el [estilo d
 
 Tiene relación con la forma de trabajar cuando usamos Redux mediante la exportación de funciones declaradas.
 
-<p align="center">
+<p align="center" style="background: black; padding: 12px;">
   <a href="#" rel="noopener" target="_blank"><img width="500" src="https://raw.github.com/LissetteIbnz/jsdaycan2019-vuex-typescript/master/images/jsdaycan2019.svg?sanitize=true" alt="JSDayCAN"></a></p>
 </p>
