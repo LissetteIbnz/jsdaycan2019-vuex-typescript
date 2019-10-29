@@ -1,9 +1,10 @@
 import Vue from "vue";
 import App from "./App.vue";
 import store from "./store";
-import vuetify from "./core/plugins/vuetify";
+import { vuetify } from "./core/plugins";
+import { currency } from "./core/filters";
 
-Vue.use(vuetify);
+Vue.filter("currency", currency);
 
 Vue.config.productionTip = false;
 
