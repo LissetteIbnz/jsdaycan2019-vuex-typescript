@@ -1,29 +1,11 @@
-# jsdaycan19-vuex-ts
+# Cómo implementar Vuex con TypeScript
 
-## Project setup
+Este repositorio contiene el código de muestra para la charla del [JSDayCAN2019](https://jsdaycanarias.com/).
 
-```
-yarn install
-```
+Es una primera aproximación basada en mutaciones y acciones usando el [estilo de objetos](https://vuex.vuejs.org/guide/mutations.html#object-style-commit), que nos proporciona tipado en la carga de parámetros.
 
-### Compiles and hot-reloads for development
+Tiene relación con la forma de trabajar cuando usamos Redux mediante la exportación de funciones declaradas.
 
-```
-yarn start
-```
-
-### Compiles and minifies for production
-
-```
-yarn build
-```
-
-### Lints and fixes files
-
-```
-yarn lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
+<p align="center">
+  <a href="#" rel="noopener" target="_blank"><img width="500" src="https://raw.github.com/LissetteIbnz/jsdaycan2019-vuex-typescript/master/images/jsdaycan2019.svg?sanitize=true" alt="JSDayCAN"></a></p>
+</p>
