@@ -15,7 +15,6 @@ const mockProducts: ProductAM[] = [
 ];
 
 export const buyProducts = (products: ProductAM[]): Promise<void> => {
-  console.log("buyProducts: products", products);
   const promise = new Promise<void>((resolve, reject) => {
     setTimeout(() => {
       Math.random() > 0.5 ? resolve() : reject();
