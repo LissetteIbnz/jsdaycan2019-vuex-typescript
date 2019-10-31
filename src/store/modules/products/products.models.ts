@@ -1,4 +1,4 @@
-/** Producst State */
+/** Products State */
 export interface ProductsState {
   all: Product[];
 }

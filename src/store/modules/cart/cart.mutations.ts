@@ -1,21 +1,22 @@
-import { MutationTree } from "vuex";
+import { RootState } from "../../root.models";
+import { DefineMutations, DefineTypes } from "../../store.helpers";
 import { CartState, AddedItem } from "./cart.models";
 
-enum MutationsTypes {
-  ADD_TO_CART = "addToCart",
-  CHECKOUT_REQUEST = "checkoutRequest",
-  CHECKOUT_SUCCESS = "checkoutSuccess",
-  CHECKOUT_FAILURE = "checkoutFailure",
+interface CartMutations {
+  addToCart: AddedItem["id"];
+  checkoutRequest: undefined;
+  checkoutSuccess: undefined;
+  checkoutFailure: AddedItem[];
 }
 
-const mutations: MutationTree<CartState> = {
-  [MutationsTypes.ADD_TO_CART]: (state, { id }: { id: AddedItem["id"] }) => {
+const mutations: DefineMutations<CartMutations, CartState, RootState> = {
+  addToCart(state, { payload }) {
     state.checkoutStatus = null;
 
-    const record = state.added.find(p => p.id === id);
+    const record = state.added.find(p => p.id === payload);
     if (!record) {
       state.added.push({
-        id: id,
+        id: payload,
         quantity: 1,
       });
     } else {
@@ -23,41 +24,24 @@ const mutations: MutationTree<CartState> = {
     }
   },
 
-  [MutationsTypes.CHECKOUT_REQUEST]: state => {
+  checkoutRequest: state => {
     state.added = [];
     state.checkoutStatus = null;
   },
 
-  [MutationsTypes.CHECKOUT_SUCCESS]: state =>
-    (state.checkoutStatus = "successful"),
+  checkoutSuccess: state => (state.checkoutStatus = "successful"),
 
-  [MutationsTypes.CHECKOUT_FAILURE]: (
-    state,
-    { savedCartItems }: { savedCartItems: AddedItem[] },
-  ) => {
-    state.added = savedCartItems;
+  checkoutFailure: (state, { payload }) => {
+    state.added = payload;
     state.checkoutStatus = "failed";
   },
 };
 
-export const cartMutationsTypes = {
-  [MutationsTypes.ADD_TO_CART]: (id: AddedItem["id"]) => ({
-    type: MutationsTypes.ADD_TO_CART,
-    id,
-  }),
-
-  [MutationsTypes.CHECKOUT_REQUEST]: () => ({
-    type: MutationsTypes.CHECKOUT_REQUEST,
-  }),
-
-  [MutationsTypes.CHECKOUT_SUCCESS]: () => ({
-    type: MutationsTypes.CHECKOUT_SUCCESS,
-  }),
-
-  [MutationsTypes.CHECKOUT_FAILURE]: (savedCartItems: AddedItem[]) => ({
-    type: MutationsTypes.CHECKOUT_FAILURE,
-    savedCartItems,
-  }),
+export const cartMutationsTypes: DefineTypes<CartMutations> = {
+  addToCart: payload => ({ type: "addToCart", payload }),
+  checkoutRequest: () => ({ type: "checkoutRequest" }),
+  checkoutSuccess: () => ({ type: "checkoutSuccess" }),
+  checkoutFailure: payload => ({ type: "checkoutFailure", payload }),
 };
 
 export default mutations;

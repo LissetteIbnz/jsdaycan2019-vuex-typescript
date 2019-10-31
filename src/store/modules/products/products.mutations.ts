@@ -1,35 +1,36 @@
-import { MutationTree } from "vuex";
+import { DefineMutations, DefineTypes } from "../../store.helpers";
+import { RootState } from "../../root.models";
 import { ProductsState, Product } from "./products.models";
 
-enum MutationsTypes {
-  SET_PRODUCTS = "setProducts",
-  DECREMENT_PRODUCT_INVENTORY = "decrementProductInventory",
+interface ProductsMutations {
+  setProducts: Product[];
+  decrementProductInventory: Product["id"];
 }
 
-const mutations: MutationTree<ProductsState> = {
-  [MutationsTypes.SET_PRODUCTS]: (
-    state,
-    { products }: { products: Product[] },
-    ): void => {
-    state.all = products;
+// Si quieres tener disponible el contexto del Store
+// debes pasar la interface del state raíz (a no
+// ser que la local sea la del raíz) y NO debes usar
+// una arrow function
+const mutations: DefineMutations<
+  ProductsMutations,
+  ProductsState,
+  RootState
+> = {
+  setProducts(state, { payload }) {
+    console.log("Acceso al contexto del Store:", this);
+    state.all = payload;
   },
 
-  [MutationsTypes.DECREMENT_PRODUCT_INVENTORY]: (
-    state,
-    { id }: { id: Product["id"] },
-  ): void => {
-    state.all.find(p => p.id === id)!.inventory--;
+  decrementProductInventory: (state, { payload }) => {
+    state.all.find(p => p.id === payload)!.inventory--;
   },
 };
 
-export const productsMutationsTypes = {
-  [MutationsTypes.SET_PRODUCTS]: (products: Product[]) => ({
-    type: MutationsTypes.SET_PRODUCTS,
-    products,
-  }),
-  [MutationsTypes.DECREMENT_PRODUCT_INVENTORY]: (id: Product["id"]) => ({
-    type: MutationsTypes.DECREMENT_PRODUCT_INVENTORY,
-    id,
+export const productsMutationsTypes: DefineTypes<ProductsMutations> = {
+  setProducts: payload => ({ type: "setProducts", payload }),
+  decrementProductInventory: payload => ({
+    type: "decrementProductInventory",
+    payload,
   }),
 };
 

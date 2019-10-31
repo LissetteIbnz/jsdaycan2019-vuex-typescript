@@ -1,26 +1,23 @@
-import { ActionTree } from "vuex";
 import * as shop from "../../../api/shop";
+import { DefineActions, DefineTypes } from "../../store.helpers";
 import { RootState } from "../../root.models";
 import { rootActionsTypes } from "../../root.actions";
 import { Product, mapProductsListVMToAM, productsTypes } from "../products";
 import { CartState } from "./cart.models";
 import { cartMutationsTypes } from "./cart.mutations";
 
-enum ActionsTypes {
-  CHECKOUT = "checkout",
-  ADD_TO_CART = "addToCart",
+interface CartActions {
+  checkout: Product[];
+  addToCart: Product;
 }
 
-const actions: ActionTree<CartState, RootState> = {
-  [ActionsTypes.CHECKOUT]: (
-    { commit, state, dispatch },
-    { products }: { products: Product[] },
-  ) => {
+const actions: DefineActions<CartActions, CartState, RootState> = {
+  checkout: ({ commit, state, dispatch }, { payload }) => {
     const savedCartItems = [...state.added];
     commit(cartMutationsTypes.checkoutRequest());
 
     shop
-      .buyProducts(mapProductsListVMToAM(products))
+      .buyProducts(mapProductsListVMToAM(payload))
       .then(() => {
         commit(cartMutationsTypes.checkoutSuccess());
         dispatch(
@@ -41,27 +38,16 @@ const actions: ActionTree<CartState, RootState> = {
       });
   },
 
-  [ActionsTypes.ADD_TO_CART]: (
-    { commit },
-    { product }: { product: Product },
-  ) => {
-    if (product.inventory > 0) {
-      commit(cartMutationsTypes.addToCart(product.id));
-      commit(productsTypes.mutations.decrementProductInventory(product.id));
+  addToCart: ({ commit }, { payload }) => {
+    if (payload.inventory > 0) {
+      commit(cartMutationsTypes.addToCart(payload.id));
+      commit(productsTypes.mutations.decrementProductInventory(payload.id));
     }
   },
 };
 
-export const cartActionsTypes = {
-  [ActionsTypes.CHECKOUT]: (products: Product[]) => ({
-    type: ActionsTypes.CHECKOUT,
-    products,
-  }),
-
-  [ActionsTypes.ADD_TO_CART]: (product: Product) => ({
-    type: ActionsTypes.ADD_TO_CART,
-    product,
-  }),
+export const cartActionsTypes: DefineTypes<CartActions> = {
+  checkout: payload => ({ type: "checkout", payload }),
+  addToCart: payload => ({ type: "addToCart", payload }),
 };
-
 export default actions;

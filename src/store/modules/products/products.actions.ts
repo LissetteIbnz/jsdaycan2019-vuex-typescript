@@ -1,23 +1,24 @@
-import { ActionTree } from "vuex";
 import * as shop from "../../../api/shop";
-import { RootState } from "../../root.models";
+import { DefineActions, DefineTypes } from "../../store.helpers";
 import { rootMutationsTypes } from "../../root.mutations";
 import { ProductsState } from "./products.models";
 import { productsMutationsTypes } from "./products.mutations";
 import { mapProductsListAMToVM } from "./products.mappers";
 
-enum ActionsTypes {
-  GET_ALL_PRODUCTS = "getAllProducts",
+interface ProductsActions {
+  getAllProducts: undefined;
 }
 
-const actions: ActionTree<ProductsState, RootState> = {
-  [ActionsTypes.GET_ALL_PRODUCTS]: ({ commit }) => {
+const actions: DefineActions<ProductsActions, ProductsState> = {
+  getAllProducts: ({ commit }) => {
     commit(rootMutationsTypes.setLoading(true));
 
     shop
       .getProducts()
       .then(products => {
-        commit(productsMutationsTypes.setProducts(mapProductsListAMToVM(products)));
+        commit(
+          productsMutationsTypes.setProducts(mapProductsListAMToVM(products)),
+        );
       })
       .finally(() => {
         commit(rootMutationsTypes.setLoading(false));
@@ -25,10 +26,8 @@ const actions: ActionTree<ProductsState, RootState> = {
   },
 };
 
-export const productsActionsTypes = {
-  [ActionsTypes.GET_ALL_PRODUCTS]: () => ({
-    type: ActionsTypes.GET_ALL_PRODUCTS,
-  }),
+export const productsActionsTypes: DefineTypes<ProductsActions> = {
+  getAllProducts: () => ({ type: "getAllProducts" }),
 };
 
 export default actions;

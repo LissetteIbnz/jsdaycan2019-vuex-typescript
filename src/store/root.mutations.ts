@@ -1,41 +1,27 @@
-import { MutationTree } from "vuex";
 import { RootState } from "./root.models";
+import { DefineMutations, DefineTypes } from "./store.helpers";
 
-enum MutationsTypes {
-  SET_LOADING = "setLoading",
-  SET_SNACKBAR = "setSnackbar",
+interface RootMutations {
+  setLoading: RootState["loading"];
+  setSnackbar: RootState["snackbar"];
 }
 
-const mutations: MutationTree<RootState> = {
-  [MutationsTypes.SET_LOADING]: (
-    state,
-    { loading }: { loading: RootState["loading"] },
-  ) => {
-    state.loading = loading;
+const mutations: DefineMutations<RootMutations, RootState> = {
+  setLoading(state, { payload }) {
+    state.loading = payload;
   },
-
-  [MutationsTypes.SET_SNACKBAR]: (
-    state,
-    { snackbar }: { snackbar: RootState["snackbar"] },
-  ) => {
+  setSnackbar(state, { payload }) {
     state.snackbar = {
-      message: snackbar.message,
-      type: snackbar.type || "success",
-      isActive: snackbar.isActive,
+      message: payload.message,
+      type: payload.type || "success",
+      isActive: payload.isActive,
     };
   },
 };
 
-/** Helpers types */
-export const rootMutationsTypes = {
-  [MutationsTypes.SET_LOADING]: (loading: RootState["loading"]) => ({
-    type: MutationsTypes.SET_LOADING,
-    loading,
-  }),
-  [MutationsTypes.SET_SNACKBAR]: (snackbar: RootState["snackbar"]) => ({
-    type: MutationsTypes.SET_SNACKBAR,
-    snackbar,
-  }),
+export const rootMutationsTypes: DefineTypes<RootMutations> = {
+  setLoading: payload => ({ type: "setLoading", payload }),
+  setSnackbar: payload => ({ type: "setSnackbar", payload }),
 };
 
 export default mutations;
