@@ -5,7 +5,7 @@ import { ProductsState } from "./products.models";
 import { productsMutationsTypes } from "./products.mutations";
 import { mapProductsListAMToVM } from "./products.mappers";
 
-interface ProductsActions {
+export interface ProductsActions {
   getAllProducts: undefined;
 }
 

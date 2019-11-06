@@ -1,8 +1,8 @@
-import { RootState } from "../../root.models";
 import { DefineMutations, DefineTypes } from "../../store.helpers";
+import { RootState } from "../../root.models";
 import { CartState, AddedItem } from "./cart.models";
 
-interface CartMutations {
+export interface CartMutations {
   addToCart: AddedItem["id"];
   checkoutRequest: undefined;
   checkoutSuccess: undefined;

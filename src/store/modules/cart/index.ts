@@ -1,12 +1,16 @@
 import { Module } from "vuex";
+import { HelperTypes } from "../../store.helpers";
 import { RootState } from "../../root.models";
 import { CartState, initialCartState } from "./cart.models";
-import actions, { cartActionsTypes } from "./cart.actions";
-import getters, { cartGettersTypes } from "./cart.getters";
-import mutations, { cartMutationsTypes } from "./cart.mutations";
+import actions, { cartActionsTypes, CartActions } from "./cart.actions";
+import getters from "./cart.getters";
+import mutations, { cartMutationsTypes, CartMutations } from "./cart.mutations";
 
 export * from "./cart.models";
-export { cartActionsTypes, cartGettersTypes, cartMutationsTypes };
+export * from "./cart.actions";
+export * from "./cart.getters";
+// export { cartActionsTypes, cartMutationsTypes };
+// export type CartGetters = CartGetters; // https://github.com/microsoft/TypeScript/issues/28481
 
 export const cart: Module<CartState, RootState> = {
   namespaced: false,
@@ -17,8 +21,7 @@ export const cart: Module<CartState, RootState> = {
 };
 
 /** Helper types Object */
-export const cartTypes = {
+export const cartTypes: HelperTypes<CartMutations, CartActions> = {
   mutations: cartMutationsTypes,
-  getters: cartGettersTypes,
   actions: cartActionsTypes,
 };

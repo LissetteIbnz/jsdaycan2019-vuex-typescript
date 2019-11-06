@@ -1,21 +1,16 @@
 import Vue from "vue";
-import Vuex, { StoreOptions } from "vuex";
+import Vuex from "vuex";
+import { StoreTS } from "./store.helpers";
 import { RootState, initialRootState } from "./root.models";
 import mutations, { rootMutationsTypes } from "./root.mutations";
 import actions, { rootActionsTypes } from "./root.actions";
-import getters, { rootGettersTypes } from "./root.getters";
-import {
-  cart,
-  cartTypes,
-} from "./modules/cart";
-import {
-  products,
-  productsTypes,
-} from "./modules/products";
+import getters, { RootGetters } from "./root.getters";
+import { cart, cartTypes, CartGetters } from "./modules/cart";
+import { products, productsTypes } from "./modules/products";
 
 Vue.use(Vuex);
 
-const store: StoreOptions<RootState> = {
+export const store = new Vuex.Store<RootState>({
   strict: true,
   state: initialRootState,
   mutations,
@@ -25,11 +20,10 @@ const store: StoreOptions<RootState> = {
     cart,
     products,
   },
-};
+});
 
 export const rootTypes = {
   actions: rootActionsTypes,
-  getters: rootGettersTypes,
   mutations: rootMutationsTypes,
 };
 
@@ -41,4 +35,4 @@ export const storeTypes = {
 };
 
 export * from "./root.models";
-export default new Vuex.Store<RootState>(store);
+export default store as StoreTS<RootState, RootGetters & CartGetters>;

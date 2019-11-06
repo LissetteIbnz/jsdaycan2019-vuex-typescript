@@ -6,7 +6,7 @@ import { Product, mapProductsListVMToAM, productsTypes } from "../products";
 import { CartState } from "./cart.models";
 import { cartMutationsTypes } from "./cart.mutations";
 
-interface CartActions {
+export interface CartActions {
   checkout: Product[];
   addToCart: Product;
 }
@@ -41,7 +41,7 @@ const actions: DefineActions<CartActions, CartState, RootState> = {
   addToCart: ({ commit }, { payload }) => {
     if (payload.inventory > 0) {
       commit(cartMutationsTypes.addToCart(payload.id));
-      commit(productsTypes.mutations.decrementProductInventory(payload.id));
+      commit(productsTypes.mutations!.decrementProductInventory(payload.id));
     }
   },
 };

@@ -1,13 +1,13 @@
-import { GetterTree } from "vuex";
+import { DefineGetters } from "../../store.helpers";
 import { RootState } from "../../root.models";
-import { ProductsState } from "./products.models";
+import { ProductsState, Product } from "./products.models";
 
-export const productsGettersTypes = {
-  allProducts: "allProducts"
-};
+export interface ProductsGetters {
+  allProducts: Product[];
+}
 
-const getters: GetterTree<ProductsState, RootState> = {
-  [productsGettersTypes.allProducts]: state => state.all,
+const getters: DefineGetters<ProductsGetters, ProductsState, RootState> = {
+  allProducts: state => state.all,
 };
 
 export default getters;

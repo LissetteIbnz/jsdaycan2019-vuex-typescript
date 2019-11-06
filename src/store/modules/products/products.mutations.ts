@@ -2,7 +2,7 @@ import { DefineMutations, DefineTypes } from "../../store.helpers";
 import { RootState } from "../../root.models";
 import { ProductsState, Product } from "./products.models";
 
-interface ProductsMutations {
+export interface ProductsMutations {
   setProducts: Product[];
   decrementProductInventory: Product["id"];
 }

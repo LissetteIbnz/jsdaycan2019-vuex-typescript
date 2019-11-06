@@ -1,13 +1,20 @@
 import { Module } from "vuex";
 import { RootState } from "../../root.models";
 import { ProductsState, initialProductsState } from "./products.models";
-import getters, { productsGettersTypes } from "./products.getters";
-import mutations, { productsMutationsTypes } from "./products.mutations";
-import actions, { productsActionsTypes } from "./products.actions";
+import getters from "./products.getters";
+import mutations, {
+  productsMutationsTypes,
+  ProductsMutations,
+} from "./products.mutations";
+import actions, {
+  productsActionsTypes,
+  ProductsActions,
+} from "./products.actions";
+import { HelperTypes } from "../../store.helpers";
 
 export * from "./products.models";
 export * from "./products.mappers";
-export { productsGettersTypes, productsMutationsTypes, productsActionsTypes };
+export { productsMutationsTypes, productsActionsTypes };
 
 export const products: Module<ProductsState, RootState> = {
   namespaced: false,
@@ -18,8 +25,7 @@ export const products: Module<ProductsState, RootState> = {
 };
 
 /** Helper types Object */
-export const productsTypes = {
+export const productsTypes: HelperTypes<ProductsMutations, ProductsActions> = {
   mutations: productsMutationsTypes,
-  getters: productsGettersTypes,
   actions: productsActionsTypes,
 };
