@@ -7,6 +7,11 @@ export type DefineTypes<Methods> = {
     : HandlerWithPayload<Methods, Methods[Key]>;
 };
 
+export interface HelperTypes<Mutations, Actions> {
+  mutations?: DefineTypes<Mutations>;
+  actions?: DefineTypes<Actions>;
+}
+
 /** Payload types */
 type HandlerWithPayload<Key, TypeKey> = (
   payload: TypeKey,
@@ -46,10 +51,19 @@ type ActionWithoutPayload<State, RootState = undefined> = (
   ctx: ActionContext<State, StateLocalByDefault<State, RootState>>,
 ) => void | Promise<any>;
 
-/** Namespace */
-export const transformNameSpace = <Methods>(
-  method: keyof Methods,
-  namespace?: string,
-  root?: boolean,
-): keyof Methods =>
-  !root || !namespace ? method : (`${namespace}/${method}` as keyof Methods);
+/** Getters helpers */
+export type DefineGetters<Getters, State, RootState = {}, RootGetters = {}> = {
+  [K in keyof Getters]: (
+    state: State,
+    getters: Getters,
+    rootState: RootState,
+    rootGetters: RootGetters,
+  ) => Getters[K];
+};
+
+export type GettersHelper<Getter> = { [K in keyof Getter]: Getter[K] };
+
+/** Store TS */
+export type StoreTS<State, Getters> = Omit<Store<State>, "getters"> & {
+  readonly getters: GettersHelper<Getters>;
+};
