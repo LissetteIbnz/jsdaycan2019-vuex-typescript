@@ -10,6 +10,7 @@ Ramas con distintas implementaciones:
 
 - [master](https://github.com/LissetteIbnz/jsdaycan2019-vuex-typescript/tree/master): tipado básico.
 - [types-advanced](https://github.com/LissetteIbnz/jsdaycan2019-vuex-typescript/tree/types-advanced): uso de tipos avanzados de TypeScript.
+- [complex-store](https://github.com/LissetteIbnz/jsdaycan2019-vuex-typescript/tree/complex-store): uso de tipos avanzados de TypeScript y sobre-escritura del tipado de Vuex (nivel básico).
 
 <p align="center" style="background: black; padding: 12px;">
   <a href="#" rel="noopener" target="_blank"><img width="500" src="https://raw.github.com/LissetteIbnz/jsdaycan2019-vuex-typescript/master/images/jsdaycan2019.svg?sanitize=true" alt="JSDayCAN"></a></p>
