@@ -1,10 +1,10 @@
 import { MutationTree } from "vuex";
 import { RootState } from "./root.models";
 
-enum MutationsTypes {
-  SET_LOADING = "setLoading",
-  SET_SNACKBAR = "setSnackbar",
-}
+const MutationsTypes = {
+  SET_LOADING: "setLoading",
+  SET_SNACKBAR: "setSnackbar",
+} as const;
 
 const mutations: MutationTree<RootState> = {
   [MutationsTypes.SET_LOADING]: (
