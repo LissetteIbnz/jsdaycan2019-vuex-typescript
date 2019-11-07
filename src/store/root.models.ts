@@ -13,7 +13,7 @@ interface Snackbar {
   type?: "success" | "info" | "error";
 }
 
-export type SetSnackbar = Pick<RootState["snackbar"], "message" | "type">;
+export type SetSnackbar = Pick<Snackbar, "message" | "type">;
 
 export const initialRootState: RootState = {
   loading: false,
