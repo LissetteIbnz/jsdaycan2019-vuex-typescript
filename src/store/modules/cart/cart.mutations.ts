@@ -1,4 +1,4 @@
-import { DefineMutations, DefineTypes } from "../../store.helpers";
+import { DefineMutationTree, DefineTypes } from "../../store.helpers";
 import { RootState } from "../../root.models";
 import { CartState, AddedItem } from "./cart.models";
 
@@ -9,7 +9,7 @@ export interface CartMutations {
   checkoutFailure: AddedItem[];
 }
 
-const mutations: DefineMutations<CartMutations, CartState, RootState> = {
+const mutations: DefineMutationTree<CartMutations, CartState, RootState> = {
   addToCart(state, { payload }) {
     state.checkoutStatus = null;
 

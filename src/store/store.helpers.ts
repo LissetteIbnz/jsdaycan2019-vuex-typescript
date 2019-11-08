@@ -7,9 +7,9 @@ export type DefineTypes<Methods> = {
     : HandlerWithPayload<Methods, Methods[Key]>;
 };
 
-export interface HelperTypes<Mutations, Actions> {
-  mutations?: DefineTypes<Mutations>;
-  actions?: DefineTypes<Actions>;
+export interface HelperTypes<Mutation, Action> {
+  mutations?: DefineTypes<Mutation>;
+  actions?: DefineTypes<Action>;
 }
 
 /** Payload types */
@@ -25,7 +25,7 @@ type HandlerWithoutPayload<Key> = (
 type StateLocalByDefault<S, R> = R extends undefined ? any : R;
 
 /** Mutations helpers */
-export type DefineMutations<Mutation, State, RootState = undefined> = {
+export type DefineMutationTree<Mutation, State, RootState = undefined> = {
   [K in keyof Mutation]: (
     this: Store<StateLocalByDefault<State, RootState>>,
     state: State,
@@ -34,7 +34,7 @@ export type DefineMutations<Mutation, State, RootState = undefined> = {
 };
 
 /** Actions helpers */
-export type DefineActions<Actions, State, RootState = undefined> = {
+export type DefineActionTree<Actions, State, RootState = undefined> = {
   [Prop in keyof Actions]: Actions[Prop] extends undefined
     ? ActionWithoutPayload<State, RootState>
     : ActionWithPayload<State, Actions[Prop], RootState>;
@@ -52,18 +52,18 @@ type ActionWithoutPayload<State, RootState = undefined> = (
 ) => void | Promise<any>;
 
 /** Getters helpers */
-export type DefineGetters<Getters, State, RootState = {}, RootGetters = {}> = {
-  [K in keyof Getters]: (
+export type DefineGetterTree<Getter, State, RootState = {}, RootGetter = {}> = {
+  [K in keyof Getter]: (
     state: State,
-    getters: Getters,
+    getters: Getter,
     rootState: RootState,
-    rootGetters: RootGetters,
-  ) => Getters[K];
+    rootGetters: RootGetter,
+  ) => Getter[K];
 };
 
-export type GettersHelper<Getter> = { [K in keyof Getter]: Getter[K] };
+export type GetterHelper<Getter> = { [K in keyof Getter]: Getter[K] };
 
 /** Store TS */
 export type StoreTS<State, Getters> = Omit<Store<State>, "getters"> & {
-  readonly getters: GettersHelper<Getters>;
+  readonly getters: GetterHelper<Getters>;
 };

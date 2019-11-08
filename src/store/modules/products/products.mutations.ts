@@ -1,4 +1,4 @@
-import { DefineMutations, DefineTypes } from "../../store.helpers";
+import { DefineMutationTree, DefineTypes } from "../../store.helpers";
 import { RootState } from "../../root.models";
 import { ProductsState, Product } from "./products.models";
 
@@ -11,7 +11,7 @@ export interface ProductsMutations {
 // debes pasar la interface del state raíz (a no
 // ser que la local sea la del raíz) y NO debes usar
 // una arrow function
-const mutations: DefineMutations<
+const mutations: DefineMutationTree<
   ProductsMutations,
   ProductsState,
   RootState

@@ -1,12 +1,12 @@
 import { RootState } from "./root.models";
-import { DefineMutations, DefineTypes } from "./store.helpers";
+import { DefineMutationTree, DefineTypes } from "./store.helpers";
 
-interface RootMutations {
+export interface RootMutations {
   setLoading: RootState["loading"];
   setSnackbar: RootState["snackbar"];
 }
 
-const mutations: DefineMutations<RootMutations, RootState> = {
+const mutations: DefineMutationTree<RootMutations, RootState> = {
   setLoading(state, { payload }) {
     state.loading = payload;
   },

@@ -1,12 +1,12 @@
 import { RootState, SetSnackbar } from "./root.models";
-import { DefineActions, DefineTypes } from "./store.helpers";
+import { DefineActionTree, DefineTypes } from "./store.helpers";
 import { rootMutationsTypes } from "./root.mutations";
 
-interface RootActions {
+export interface RootActions {
   showSnackbar: SetSnackbar;
 }
 
-const actions: DefineActions<RootActions, RootState> = {
+const actions: DefineActionTree<RootActions, RootState> = {
   showSnackbar({ commit }, { payload }) {
     commit(rootMutationsTypes.setSnackbar({ ...payload, isActive: true }));
 

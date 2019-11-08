@@ -9,8 +9,6 @@ import mutations, { cartMutationsTypes, CartMutations } from "./cart.mutations";
 export * from "./cart.models";
 export * from "./cart.actions";
 export * from "./cart.getters";
-// export { cartActionsTypes, cartMutationsTypes };
-// export type CartGetters = CartGetters; // https://github.com/microsoft/TypeScript/issues/28481
 
 export const cart: Module<CartState, RootState> = {
   namespaced: false,

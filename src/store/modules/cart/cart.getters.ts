@@ -1,4 +1,4 @@
-import { DefineGetters } from "../../store.helpers";
+import { DefineGetterTree } from "../../store.helpers";
 import { RootState } from "../../root.models";
 import { CartState, CartProductsGetter, CheckoutStatus } from "./cart.models";
 
@@ -8,7 +8,7 @@ export interface CartGetters {
   cartTotalPrice: number;
 }
 
-const getters: DefineGetters<CartGetters, CartState, RootState> = {
+const getters: DefineGetterTree<CartGetters, CartState, RootState> = {
   checkoutStatus: state => state.checkoutStatus,
 
   cartProducts: (state, getters, rootState) =>

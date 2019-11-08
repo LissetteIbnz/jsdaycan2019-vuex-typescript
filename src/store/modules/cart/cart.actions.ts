@@ -1,5 +1,5 @@
 import * as shop from "../../../api/shop";
-import { DefineActions, DefineTypes } from "../../store.helpers";
+import { DefineActionTree, DefineTypes } from "../../store.helpers";
 import { RootState } from "../../root.models";
 import { rootActionsTypes } from "../../root.actions";
 import { Product, mapProductsListVMToAM, productsTypes } from "../products";
@@ -11,7 +11,7 @@ export interface CartActions {
   addToCart: Product;
 }
 
-const actions: DefineActions<CartActions, CartState, RootState> = {
+const actions: DefineActionTree<CartActions, CartState, RootState> = {
   checkout: ({ commit, state, dispatch }, { payload }) => {
     const savedCartItems = [...state.added];
     commit(cartMutationsTypes.checkoutRequest());

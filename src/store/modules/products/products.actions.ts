@@ -1,5 +1,5 @@
 import * as shop from "../../../api/shop";
-import { DefineActions, DefineTypes } from "../../store.helpers";
+import { DefineActionTree, DefineTypes } from "../../store.helpers";
 import { rootMutationsTypes } from "../../root.mutations";
 import { ProductsState } from "./products.models";
 import { productsMutationsTypes } from "./products.mutations";
@@ -9,7 +9,7 @@ export interface ProductsActions {
   getAllProducts: undefined;
 }
 
-const actions: DefineActions<ProductsActions, ProductsState> = {
+const actions: DefineActionTree<ProductsActions, ProductsState> = {
   getAllProducts: ({ commit }) => {
     commit(rootMutationsTypes.setLoading(true));
 
