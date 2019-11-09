@@ -4,13 +4,13 @@
 
 <script lang="ts">
 import Vue from "vue";
-import store, { storeTypes, RootState } from "../store";
+import store, { RootState } from "../store";
 
 export default Vue.extend({
   name: "Snackbar",
   computed: {
     snackbar(): RootState["snackbar"] {
-      return store.getters[storeTypes.root.getters.snackbar];
+      return store.getters.snackbar;
     }
   }
 });

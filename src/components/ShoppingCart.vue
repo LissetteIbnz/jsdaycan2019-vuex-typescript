@@ -21,28 +21,22 @@ import store, { storeTypes } from "../store";
 import { CartProductsGetter, CheckoutStatus } from "../store/modules/cart";
 import { Product } from "../store/modules/products";
 
-const {
-  checkoutStatus,
-  cartProducts,
-  cartTotalPrice
-} = storeTypes.cart.getters;
-
 export default Vue.extend({
   name: "ShoppingCart",
   computed: {
-    total(): Number {
-      return store.getters[cartTotalPrice];
+    total() {
+      return store.getters.cartTotalPrice;
     },
-    products(): CartProductsGetter[] {
-      return store.getters[cartProducts];
+    products() {
+      return store.getters.cartProducts;
     },
-    checkoutStatus(): CheckoutStatus {
-      return store.getters[checkoutStatus];
+    checkoutStatus() {
+      return store.getters.checkoutStatus;
     }
   },
   methods: {
     checkout(products: Product[]) {
-      store.dispatch(storeTypes.cart.actions.checkout(products));
+      store.dispatch(storeTypes.cart.actions!.checkout(products));
     }
   }
 });

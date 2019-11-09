@@ -36,7 +36,7 @@ export default Vue.extend({
   },
   methods: {
     addToCart(product: Product) {
-      store.dispatch(storeTypes.cart.actions.addToCart(product));
+      store.dispatch(storeTypes.cart.actions!.addToCart(product));
     }
   }
 });

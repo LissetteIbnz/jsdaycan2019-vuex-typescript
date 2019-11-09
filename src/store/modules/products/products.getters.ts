@@ -1,17 +1,13 @@
-import { GetterTree } from "vuex";
+import { DefineGetterTree } from "../../store.helpers";
 import { RootState } from "../../root.models";
-import { ProductsState } from "./products.models";
+import { ProductsState, Product } from "./products.models";
 
-enum GettersTypes {
-  ALL_PRODUCTS = "allProducts",
+export interface ProductsGetters {
+  allProducts: Product[];
 }
 
-const getters: GetterTree<ProductsState, RootState> = {
-  [GettersTypes.ALL_PRODUCTS]: state => state.all,
-};
-
-export const productsGettersTypes = {
-  [GettersTypes.ALL_PRODUCTS]: GettersTypes.ALL_PRODUCTS,
+const getters: DefineGetterTree<ProductsGetters, ProductsState, RootState> = {
+  allProducts: state => state.all,
 };
 
 export default getters;

@@ -34,7 +34,7 @@ export default Vue.extend({
   },
   methods: {
     reloadProducts() {
-      store.dispatch(storeTypes.products.actions.getAllProducts());
+      store.dispatch(storeTypes.products.actions!.getAllProducts());
     }
   },
 });

@@ -1,20 +1,12 @@
-import { GetterTree } from "vuex";
+import { DefineGetterTree } from "./store.helpers";
 import { RootState } from "./root.models";
 
-enum GettersTypes {
-  SNACKBAR = "snackbar",
+export interface RootGetters {
+  snackbar: RootState["snackbar"];
 }
 
-const getters: GetterTree<RootState, {}> = {
-  [GettersTypes.SNACKBAR]: (state): RootState["snackbar"] => {
-    const { isActive, message, type } = state.snackbar;
-    return { isActive, message, type };
-  },
-};
-
-/** Helpers types */
-export const rootGettersTypes = {
-  [GettersTypes.SNACKBAR]: GettersTypes.SNACKBAR,
+const getters: DefineGetterTree<RootGetters, RootState> = {
+  snackbar: state => state.snackbar,
 };
 
 export default getters;
