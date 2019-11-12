@@ -6,7 +6,7 @@ Es una primera aproximación basada en mutaciones y acciones usando el [estilo d
 
 Tiene relación con la forma de trabajar cuando usamos Redux mediante la exportación de funciones declaradas.
 
-[Slides de la presentación](https://github.com/LissetteIbnz/jsdaycan2019-vuex-typescript/blob/basic-types/JSDayCAN2019-VuexTS.ppsx)
+[Slides de la presentación](https://docs.google.com/presentation/d/1NDcpNpTYI_AveUF2wbtAPGFJqu5OMTMrkskPOOd9FgE/edit?usp=sharing)
 
 Ramas con distintas implementaciones:
 
