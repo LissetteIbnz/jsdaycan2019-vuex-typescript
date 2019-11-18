@@ -6,6 +6,8 @@ Es una primera aproximación basada en mutaciones y acciones usando el [estilo d
 
 Tiene relación con la forma de trabajar cuando usamos Redux mediante la exportación de funciones declaradas.
 
+[Enlace a la charla](https://youtu.be/FmHcLbVYqec)
+
 [Slides de la presentación](https://docs.google.com/presentation/d/1NDcpNpTYI_AveUF2wbtAPGFJqu5OMTMrkskPOOd9FgE/edit?usp=sharing)
 
 Ramas con distintas implementaciones:
