@@ -14,7 +14,7 @@ import store from "../store";
 export default Vue.extend({
   name: "Loader",
   computed: {
-    promiseInProgress(): boolean {
+    promiseInProgress() {
       return store.state.loading;
     }
   }

@@ -30,7 +30,7 @@ import { Product } from "../store/modules/products";
 export default Vue.extend({
   name: "ProductList",
   computed: {
-    products(): Product[] {
+    products() {
       return store.state.products!.all;
     }
   },
